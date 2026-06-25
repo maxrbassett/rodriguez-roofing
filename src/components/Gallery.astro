@@ -1,0 +1,67 @@
+---
+import * as site from '@data/site';
+import { Image } from 'astro:assets';
+
+// Static imports for every gallery photo, keyed by the id used in site.gallery.
+import fb01 from '@assets/fb01.jpg';
+import fb03 from '@assets/fb03.jpg';
+import fb04 from '@assets/fb04.jpg';
+import fb06 from '@assets/fb06.jpg';
+import fb07 from '@assets/fb07.jpg';
+import fb08 from '@assets/fb08.jpg';
+import fb09 from '@assets/fb09.jpg';
+import fb10 from '@assets/fb10.jpg';
+
+const images: Record<string, ImageMetadata> = {
+  fb01, fb03, fb04, fb06, fb07, fb08, fb09, fb10,
+};
+
+// Honest stage labels → badge color. "Finished" reads as the brand sky; the
+// in-progress stages use neutral navy so we never imply a paired before/after.
+const stageClass: Record<string, string> = {
+  Finished: 'bg-sky',
+  During: 'bg-slate-deep/85',
+  'On the job': 'bg-slate-deep/85',
+};
+
+const photos = site.gallery
+  .map((g) => ({ ...g, img: images[g.id] }))
+  .filter((g) => g.img);
+---
+
+<section id="gallery" class="bg-white py-16 sm:py-24" aria-labelledby="gallery-title">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <p class="mb-2 font-display text-sm font-600 uppercase tracking-[0.22em] text-sky">Our work</p>
+    <h2 id="gallery-title" class="font-display text-3xl font-800 uppercase text-slate-deep sm:text-4xl">
+      Real roofs, real jobs
+    </h2>
+    <p class="mt-3 max-w-2xl text-lg text-steel">{site.galleryCaption}</p>
+
+    <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {photos.map((p, i) => (
+        <figure class="group m-0 overflow-hidden rounded-xl border border-steel-300">
+          <div class="relative aspect-[4/3] w-full overflow-hidden">
+            <Image
+              src={p.img}
+              alt={p.alt}
+              widths={[400, 700]}
+              sizes="(min-width: 1024px) 31vw, (min-width: 640px) 47vw, 90vw"
+              loading={i < 3 ? 'eager' : 'lazy'}
+              class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+            <span class={`absolute left-2 top-2 rounded px-2 py-1 font-display text-xs font-600 uppercase tracking-wide text-white ${stageClass[p.stage] ?? 'bg-slate-deep/85'}`}>
+              {p.stage}
+            </span>
+          </div>
+          <figcaption class="bg-cloud px-4 py-3 text-sm font-600 text-slate-deep">
+            {p.caption}
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+
+    <p class="mt-6 text-sm text-steel">
+      Want to see work like this on your home? <a href="#quote" class="font-600 text-sky underline">Request a free inspection</a>.
+    </p>
+  </div>
+</section>

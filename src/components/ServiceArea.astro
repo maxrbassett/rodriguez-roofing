@@ -1,0 +1,48 @@
+---
+import * as site from '@data/site';
+---
+
+<section id="area" class="bg-white py-16 sm:py-24" aria-labelledby="area-title">
+  <div class="mx-auto grid max-w-6xl items-start gap-10 px-4 sm:px-6 lg:grid-cols-2">
+    <div>
+      <p class="mb-2 font-display text-sm font-600 uppercase tracking-[0.22em] text-sky">Where we work</p>
+      <h2 id="area-title" class="font-display text-3xl font-800 uppercase text-slate-deep sm:text-4xl">
+        Service area
+      </h2>
+      <p class="mt-3 max-w-xl text-lg text-steel">
+        We serve homeowners and businesses across the Carolinas. Not sure if you’re in range?
+        <a href="#quote" class="font-600 text-sky underline">Ask us</a> — we’ll let you know.
+      </p>
+
+      <ul class="mt-6 grid gap-3">
+        {site.serviceAreas.map((a) => (
+          <li class="flex items-center gap-3 rounded-lg border border-steel-300 bg-cloud px-4 py-3">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1c6fb5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="shrink-0">
+              <path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z" />
+              <circle cx="12" cy="10" r="2.5" />
+            </svg>
+            <span class="font-600 text-slate-deep">{a.city}, {a.state}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="mt-4 text-sm text-steel">
+        Based in Lancaster, SC and serving the surrounding Carolinas — not sure if you’re in range? Call us to check your area.
+      </p>
+    </div>
+
+    <figure class="m-0">
+      <div class="relative overflow-hidden rounded-xl border border-steel-300">
+        <iframe
+          title="Map centered on Lancaster, SC — the Rodriguez Roofing home base"
+          src={site.mapEmbedUrl}
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          class="block h-80 w-full border-0"
+        ></iframe>
+      </div>
+      <figcaption class="mt-2 text-xs text-steel">
+        Centered on our Lancaster, SC home base — call to confirm coverage for your exact location.
+      </figcaption>
+    </figure>
+  </div>
+</section>

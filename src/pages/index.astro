@@ -1,0 +1,29 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Nav from '@components/Nav.astro';
+import Hero from '@components/Hero.astro';
+import Services from '@components/Services.astro';
+import Gallery from '@components/Gallery.astro';
+import Financing from '@components/Financing.astro';
+import Trust from '@components/Trust.astro';
+import QuoteForm from '@components/QuoteForm.astro';
+import ServiceArea from '@components/ServiceArea.astro';
+import SiteFooter from '@components/SiteFooter.astro';
+import MobileCallBar from '@components/MobileCallBar.astro';
+---
+
+<Layout>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <Nav />
+  <Hero />
+  <main id="main">
+    <Services />
+    <Gallery />
+    <Financing />
+    <Trust />
+    <QuoteForm />
+    <ServiceArea />
+  </main>
+  <SiteFooter />
+  <MobileCallBar />
+</Layout>

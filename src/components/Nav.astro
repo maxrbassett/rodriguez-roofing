@@ -1,0 +1,45 @@
+---
+import * as site from '@data/site';
+import { Image } from 'astro:assets';
+import logoMark from '@assets/logo-mark.png';
+---
+
+<header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-steel-300">
+  <nav
+    class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6"
+    aria-label="Primary"
+  >
+    <a href="#top" class="flex items-center gap-2.5 no-underline">
+      <Image src={logoMark} alt="" class="h-9 w-auto sm:h-10" />
+      <span class="font-display text-lg font-700 leading-none text-slate-deep">{site.shortName}</span>
+    </a>
+
+    <ul class="hidden items-center gap-5 lg:flex xl:gap-7">
+      {site.nav.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            class="whitespace-nowrap font-display text-sm font-600 uppercase tracking-wide text-steel no-underline transition-colors hover:text-sky"
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <div class="flex items-center gap-3">
+      <a
+        href={`tel:${site.phoneTel}`}
+        class="hidden whitespace-nowrap font-display text-sm font-600 text-slate-deep no-underline sm:inline"
+      >
+        {site.phone}
+      </a>
+      <a
+        href="#quote"
+        class="whitespace-nowrap rounded-full bg-sky px-4 py-2 font-display text-sm font-600 uppercase tracking-wide text-white no-underline transition-colors hover:bg-sky-deep"
+      >
+        Free quote
+      </a>
+    </div>
+  </nav>
+</header>

@@ -1,0 +1,147 @@
+---
+import * as site from '@data/site';
+const q = site.quote;
+---
+
+<section id="quote" class="bg-cloud py-16 sm:py-24" aria-labelledby="quote-title">
+  <div class="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-2">
+    <div>
+      <p class="mb-2 font-display text-sm font-600 uppercase tracking-[0.22em] text-sky">Free &amp; no pressure</p>
+      <h2 id="quote-title" class="font-display text-3xl font-800 uppercase text-slate-deep sm:text-4xl">{q.heading}</h2>
+      <p class="mt-3 max-w-xl text-lg text-steel">{q.blurb}</p>
+
+      <ul class="mt-6 grid gap-3">
+        {['Free, written estimate', 'Fast response — usually same or next business day', 'No obligation, no hard sell'].map((point) => (
+          <li class="flex items-start gap-2 text-steel">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1c6fb5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="mt-0.5 shrink-0">
+              <path d="M5 12l4 4L19 7" />
+            </svg>
+            {point}
+          </li>
+        ))}
+      </ul>
+
+      <p class="mt-6 text-steel">
+        Prefer to talk? Call
+        <a href={`tel:${site.phoneTel}`} class="font-600 text-sky underline">{site.phone}</a>.
+        <span class="block text-sm">{site.languagesNote} · {site.hoursNote}.</span>
+      </p>
+    </div>
+
+    <!-- Front-end only: validates client-side, then shows a notice. Wire to email/SMS or a form service before launch. -->
+    <form id="quote-form" class="rounded-2xl border border-steel-300 bg-white p-6 shadow-lg sm:p-8" novalidate aria-describedby="quote-demo-note">
+      <div class="grid gap-4">
+        <div>
+          <label for="qf-name" class="block font-display text-xs font-600 uppercase tracking-wide text-steel">Name <span class="text-sky">*</span></label>
+          <input id="qf-name" name="name" type="text" autocomplete="name" required
+            class="mt-1 w-full rounded-lg border border-steel-300 bg-cloud px-3 py-2.5 text-ink focus:border-slate focus:outline-none" />
+          <p class="mt-1 hidden text-sm text-sky" data-error-for="qf-name">Please enter your name.</p>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-2">
+          <div>
+            <label for="qf-phone" class="block font-display text-xs font-600 uppercase tracking-wide text-steel">Phone <span class="text-sky">*</span></label>
+            <input id="qf-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required
+              class="mt-1 w-full rounded-lg border border-steel-300 bg-cloud px-3 py-2.5 text-ink focus:border-slate focus:outline-none" />
+            <p class="mt-1 hidden text-sm text-sky" data-error-for="qf-phone">Enter a valid phone number (at least 10 digits).</p>
+          </div>
+          <div>
+            <label for="qf-email" class="block font-display text-xs font-600 uppercase tracking-wide text-steel">Email <span class="text-sky">*</span></label>
+            <input id="qf-email" name="email" type="email" autocomplete="email" required
+              class="mt-1 w-full rounded-lg border border-steel-300 bg-cloud px-3 py-2.5 text-ink focus:border-slate focus:outline-none" />
+            <p class="mt-1 hidden text-sm text-sky" data-error-for="qf-email">Enter a valid email address.</p>
+          </div>
+        </div>
+
+        <div>
+          <label for="qf-address" class="block font-display text-xs font-600 uppercase tracking-wide text-steel">Property address <span class="text-sky">*</span></label>
+          <input id="qf-address" name="address" type="text" autocomplete="street-address" required
+            class="mt-1 w-full rounded-lg border border-steel-300 bg-cloud px-3 py-2.5 text-ink focus:border-slate focus:outline-none" />
+          <p class="mt-1 hidden text-sm text-sky" data-error-for="qf-address">Please enter the property address.</p>
+        </div>
+
+        <div>
+          <label for="qf-service" class="block font-display text-xs font-600 uppercase tracking-wide text-steel">Service needed <span class="text-sky">*</span></label>
+          <select id="qf-service" name="service" required
+            class="mt-1 w-full rounded-lg border border-steel-300 bg-cloud px-3 py-2.5 text-ink focus:border-slate focus:outline-none">
+            <option value="">Select a service…</option>
+            {q.serviceTypes.map((s) => <option value={s}>{s}</option>)}
+          </select>
+          <p class="mt-1 hidden text-sm text-sky" data-error-for="qf-service">Please choose a service.</p>
+        </div>
+
+        <div>
+          <label for="qf-message" class="block font-display text-xs font-600 uppercase tracking-wide text-steel">Message</label>
+          <textarea id="qf-message" name="message" rows="4"
+            class="mt-1 w-full rounded-lg border border-steel-300 bg-cloud px-3 py-2.5 text-ink focus:border-slate focus:outline-none"></textarea>
+        </div>
+
+        <button type="submit"
+          class="rounded-full bg-sky px-6 py-3 font-display text-base font-600 uppercase tracking-wide text-white transition-colors hover:bg-sky-deep">
+          Request my free quote
+        </button>
+
+        <p id="quote-demo-note" class="text-xs text-steel">
+          Online submissions aren’t live yet — for the fastest response, call
+          <a href={`tel:${site.phoneTel}`} class="font-600 text-sky underline">{site.phone}</a>.
+        </p>
+
+        <div data-success role="status" hidden
+          class="rounded-lg border border-slate/30 bg-slate-deep/5 p-4 text-slate-deep">
+          <strong>✓ Thanks — your details look good.</strong>
+          <span class="block text-sm">Online submissions aren’t connected yet. Please call {site.phone} or email {site.email} so we can schedule your free inspection.</span>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('quote-form') as HTMLFormElement | null;
+  if (form) {
+    const showError = (id: string, show: boolean) => {
+      const field = document.getElementById(id);
+      const msg = form.querySelector<HTMLElement>(`[data-error-for="${id}"]`);
+      if (msg) msg.hidden = !show;
+      if (field) {
+        field.setAttribute('aria-invalid', show ? 'true' : 'false');
+        field.classList.toggle('border-sky', show);
+      }
+    };
+
+    const emailOk = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+    const phoneOk = (v: string) => (v.match(/\d/g) || []).length >= 10;
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const get = (id: string) =>
+        (document.getElementById(id) as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | null)?.value.trim() ?? '';
+
+      const checks: Array<[string, boolean]> = [
+        ['qf-name', get('qf-name').length > 0],
+        ['qf-phone', phoneOk(get('qf-phone'))],
+        ['qf-email', emailOk(get('qf-email'))],
+        ['qf-address', get('qf-address').length > 0],
+        ['qf-service', get('qf-service').length > 0],
+      ];
+
+      let firstInvalid: string | null = null;
+      for (const [id, ok] of checks) {
+        showError(id, !ok);
+        if (!ok && !firstInvalid) firstInvalid = id;
+      }
+
+      if (firstInvalid) {
+        document.getElementById(firstInvalid)?.focus();
+        return;
+      }
+
+      const success = form.querySelector<HTMLElement>('[data-success]');
+      if (success) {
+        success.hidden = false;
+        success.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+      form.reset();
+    });
+  }
+</script>

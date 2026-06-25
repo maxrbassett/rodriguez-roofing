@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Rodriguez Roofing two-house mark">
+  <rect width="64" height="64" rx="12" fill="#1f3a52"/>
+  <!-- back house -->
+  <path d="M10 33 L25 17 L40 33 Z" fill="#7cc3ea"/>
+  <rect x="16" y="31" width="18" height="17" fill="#ffffff"/>
+  <!-- front house -->
+  <path d="M28 36 L43 20 L58 36 Z" fill="#4aa8e0"/>
+  <rect x="34" y="34" width="20" height="15" fill="#ffffff"/>
+  <rect x="42" y="39" width="6" height="10" fill="#1c6fb5"/>
+  <!-- baseline -->
+  <rect x="9" y="48" width="46" height="4" rx="2" fill="#7cc3ea"/>
+</svg>
