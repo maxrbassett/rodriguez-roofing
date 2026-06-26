@@ -1,0 +1,6 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "rodriguez-roofing",
+  "compatibility_date": "2026-06-25",
+  "assets": { "directory": "./dist" }
+}
